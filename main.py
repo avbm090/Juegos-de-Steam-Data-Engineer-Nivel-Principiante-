@@ -20,17 +20,18 @@ df = fastparquet.ParquetFile('steam_games.parquet').to_pandas()
 
 # Función para obtener los géneros más vendidos
 @app.get("/genero/")
-def genero(anio: int):
-    # Filtrar el DataFrame por el año deseado
-    df_anio = df[df["release_date"].dt.year == anio]
-
-    # Calcular las frecuencias de los géneros
-    frecuencias = df_anio["genres"].value_counts()
-
-    # Tomar los 5 géneros más vendidos
-    top_generos = frecuencias.head(5)
-
-    return {"top_generos": top_generos.index.tolist()}
+def genero(Year: str):
+    df_filtrado = df[df['year'] == Year]
+    if df_filtrado.empty:
+        return {"error": f"No hay datos disponibles {Year}"}
+    
+    generos_count = {}
+    for lista_generos in df_filtrado['genres']:
+        for genero_juego in lista_generos:
+            generos_count[genero_juego] = generos_count.get(genero_juego, 0) + 1
+    
+    generos_top = dict(sorted(generos_count.items(), key=lambda item: item[1], reverse=True)[:5])
+    return generos_top
 
 # Función para obtener los juegos lanzados en un año
 @app.get("/juegos/")
@@ -42,16 +43,17 @@ def juegos(anio: int):
 # Función para obtener los specs más repetidos
 @app.get("/specs/")
 def specs(anio: int):
-     # Filtrar el DataFrame por el año deseado
-    df_anio = df[df["release_date"].dt.year == anio]
-
-    # Calcular las frecuencias de los specs
-    frecuencias = df_anio["specs"].value_counts()
-
-    # Tomar los 5 géneros más vendidos
-    top_specs = frecuencias.head(5)
-
-    return {"top_generos": top_specs.index.tolist()}
+    df_filtrado = df[df["release_date"].dt.year == anio]
+    if df_filtrado.empty:
+        return {"error": f"No hay datos disponibles para el año {anio}"}
+    
+    specs_count = {}
+    for lista_specs in df_filtrado['specs']:
+        for spec in lista_specs:
+            specs_count[spec] = specs_count.get(spec, 0) + 1
+    
+    top_specs = dict(sorted(specs_count.items(), key=lambda item: item[1], reverse=True)[:5])
+    return {"top_specs": list(top_specs.keys())}
 
 # Función para obtener la cantidad de juegos lanzados en un año con early access
 @app.get("/earlyacces/")
