@@ -41,7 +41,8 @@ def juegos(anio: int):
     df_filtrado = df[df['release_date'] == anio]
     if df_filtrado.empty:
         return {"!": f"No hay datos disponibles para el año {anio}"}
-    respuesta=df_filtrado["title"].unique()
+    juegos_unicos = df_filtrado["title"].unique()
+    respuesta = {"juegos": juegos_unicos.tolist()}  # se convierte la lista en una lista Python
     return respuesta
 
 # Función para obtener los specs más repetidos
@@ -66,7 +67,7 @@ def earlyacces(anio: int):
     df_filtrado = df[df['release_date'] == anio]
     if df_filtrado.empty:
         return {"!": f"No hay datos disponibles para el año {anio}"}
-    frecuencias=df_filtrado["early_access"].sum()
+    frecuencias=df_filtrado["early_access"].value_counts().to_dict()
     
     return frecuencias
 
