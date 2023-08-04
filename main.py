@@ -41,8 +41,8 @@ def juegos(anio: int):
     df_filtrado = df[df['release_date'] == anio]
     if df_filtrado.empty:
         return {"!": f"No hay datos disponibles para el año {anio}"}
-    
-    return df_filtrado["title"].unique()
+    respuesta=df_filtrado["title"].unique()
+    return respuesta
 
 # Función para obtener los specs más repetidos
 @app.get("/specs/")
