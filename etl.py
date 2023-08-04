@@ -12,7 +12,7 @@ with open('steam_games.json', encoding='utf-8-sig') as f:
 df=pd.DataFrame(rows)
 
 
-df["release_date"] = pd.to_datetime(df["release_date"], format='%Y-%m-%d', errors='coerce')
+df["release_date"] = pd.to_datetime(df["release_date"], format='%Y-%m-%d', errors='coerce').dt.year
 
 
 # se desanidan las listas en las columnas 'genres', 'tags', 'specs', etc.
