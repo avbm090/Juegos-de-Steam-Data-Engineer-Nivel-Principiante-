@@ -21,7 +21,7 @@ df = fastparquet.ParquetFile('steam_games.parquet').to_pandas()
 @app.get("/genero/")
 def genero(anio: int):
     df_filtrado = df[df['release_date'] == anio]
-    if df_filtrado.empty:
+    if df_filtrado.empty or df_filtrado['genres'].isna().any():
         return {"!": f"No hay datos disponibles para el año {anio}"}
     
     generos_count = {}
@@ -65,6 +65,7 @@ def earlyacces(anio: int):
     if df_filtrado.empty:
         return {"!": f"No hay datos disponibles para el año {anio}"}
     frecuencias=df_filtrado["early_access"].sum()
+    
     return frecuencias
 
 # Función para obtener el análisis de sentimiento
@@ -81,7 +82,7 @@ def sentiment(anio: int):
 @app.get("/metascore/")
 def metascore(anio: int):
     # Filtrar el DataFrame por el año proporcionado
-    df_anio = df[df["release_date"] == anio]
+    df_anio = df[df["release_date"]== anio]
 
     # Eliminar duplicados basados en la columna "title"
     juegos_unicos = df_anio.drop_duplicates(subset="title")
@@ -96,10 +97,3 @@ def metascore(anio: int):
     juegos_top = top_juegos[["title", "metascore"]].to_dict(orient="records")
 
     return juegos_top
-
-
-# !uvicorn nombre_de_tu_archivo:app --reload --port 8001
-
-#Después de ejecutar esta celda, tu API FastAPI se ejecutará en el puerto 8001 en tu entorno de Colab.
-#Puedes acceder a la API en tu navegador web utilizando la URL: http://localhost:8001 o utilizar herramientas como
-#requests en Python para realizar solicitudes a la API directamente desde el entorno de Colab.
