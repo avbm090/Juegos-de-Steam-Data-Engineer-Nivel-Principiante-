@@ -21,13 +21,15 @@ df = fastparquet.ParquetFile('steam_games.parquet').to_pandas()
 @app.get("/genero/")
 def genero(anio: int):
     df_filtrado = df[df['release_date'] == anio]
-    if df_filtrado.empty or df_filtrado['genres'].isna().any():
+    if df_filtrado.empty:
         return {"!": f"No hay datos disponibles para el año {anio}"}
     
     generos_count = {}
     for lista_generos in df_filtrado['genres']:
-        for genero_juego in lista_generos:
-            generos_count[genero_juego] = generos_count.get(genero_juego, 0) + 1
+        if lista_generos is not None:
+            for genero_juego in lista_generos:
+                if genero_juego is not None:
+                    generos_count[genero_juego] = generos_count.get(genero_juego, 0) + 1
     
     generos_top = dict(sorted(generos_count.items(), key=lambda item: item[1], reverse=True)[:5])
     return generos_top
