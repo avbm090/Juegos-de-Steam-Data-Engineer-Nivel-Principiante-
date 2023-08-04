@@ -81,7 +81,7 @@ def sentiment(anio: int):
 @app.get("/metascore/")
 def metascore(anio: int):
     # Filtrar el DataFrame por el año proporcionado
-    df_anio = df[df["release_date"].dt.year == anio]
+    df_anio = df[df["release_date"] == anio]
 
     # Eliminar duplicados basados en la columna "title"
     juegos_unicos = df_anio.drop_duplicates(subset="title")
