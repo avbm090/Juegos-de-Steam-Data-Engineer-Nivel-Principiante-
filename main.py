@@ -2,7 +2,7 @@ import pandas as pd
 import ast
 from fastapi import FastAPI
 import json
-
+import fastparquet
 
 #rows=[]
 #with open('steam_games.json', encoding='utf-8-sig') as f:
@@ -12,7 +12,7 @@ import json
 #df=pd.DataFrame(rows)
 
 app = FastAPI()
-import fastparquet
+
 
 # Lee el archivo Parquet y crea un objeto DataFrame
 df = fastparquet.ParquetFile('steam_games.parquet').to_pandas()
@@ -20,10 +20,10 @@ df = fastparquet.ParquetFile('steam_games.parquet').to_pandas()
 
 # Función para obtener los géneros más vendidos
 @app.get("/genero/")
-def genero(Year: str):
-    df_filtrado = df[df['year'] == Year]
+def genero(year: int):
+    df_filtrado = df[df['year'] == year]
     if df_filtrado.empty:
-        return {"error": f"No hay datos disponibles {Year}"}
+        return {"error": f"No hay datos disponibles para el año {year}"}
     
     generos_count = {}
     for lista_generos in df_filtrado['genres']:
