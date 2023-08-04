@@ -11,7 +11,12 @@ with open('steam_games.json', encoding='utf-8-sig') as f:
 
 df=pd.DataFrame(rows)
 
-df["release_date"] = pd.to_datetime(df["release_date"],errors='coerce')
+
+df["release_date"] = pd.to_datetime(df["release_date"], format='%Y-%m-%d', errors='coerce')
+
+# Obtiene el año numérico de la columna "release_date"
+df["release_date"] = df["release_date"].dt.year
+
 
 # se desanidan las listas en las columnas 'genres', 'tags', 'specs', etc.
 #df = df.explode('genres').explode('tags').explode('specs')
