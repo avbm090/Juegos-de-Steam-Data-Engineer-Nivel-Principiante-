@@ -32,7 +32,7 @@ df['price'] = pd.to_numeric(df['price'], errors='coerce')
 
 #eliminamos las columnas que no serán necesarias para las consultas
 
-df.drop(['publisher', 'app_name','url','tags','discount_price','reviews_url','price','id','developer'], axis=1, inplace=True)
+df.drop(['app_name','url','discount_price','reviews_url','id'], axis=1, inplace=True)
 
 # Guarda el DataFrame en formato Parquet
 df.to_parquet('steam_games.parquet', index=False)
