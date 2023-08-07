@@ -30,9 +30,9 @@ kiwisolver==1.4.4
 matplotlib
 matplotlib-inline==0.1.6
 nest-asyncio==1.5.7
-numpy==1.25.2
+numpy
 packaging==23.1
-pandas==2.0.3
+pandas
 parso==0.8.3
 pickleshare==0.7.5
 Pillow==10.0.0
