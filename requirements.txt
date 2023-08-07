@@ -36,7 +36,7 @@ pandas
 parso
 pickleshare
 Pillow
-platformdirs=
+platformdirs
 prompt-toolkit
 psutil
 pure-eval
