@@ -1,11 +1,22 @@
-import pandas as pd
-from fastapi import FastAPI
-import json
-import fastparquet
-from sklearn.preprocessing import StandardScaler
-import pickle
-from sklearn.preprocessing import LabelEncoder
 
+from fastapi import FastAPI
+import pandas as pd
+import numpy as np
+import pickle 
+import matplotlib.pyplot as plt
+import seaborn as sns
+import fastparquet
+from sklearn.svm import SVR
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+from sklearn.preprocessing import LabelEncoder
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
+from sklearn.preprocessing import PolynomialFeatures
+from sklearn.model_selection import cross_val_predict
+from sklearn.tree import DecisionTreeRegressor
+from sklearn.ensemble import RandomForestRegressor
+from sklearn.ensemble import GradientBoostingRegressor
 
 # Se crea un objeto LabelEncoder
 label_encoder = LabelEncoder()
