@@ -34,7 +34,7 @@ numpy==1.25.2
 packaging==23.1
 pandas==2.0.3
 parso==0.8.3
-pickleshare==0.7.5
+pickleshare
 Pillow==10.0.0
 platformdirs==3.10.0
 prompt-toolkit==3.0.39

@@ -89,7 +89,9 @@ r2 = r2_score(y_test, prediction)
 # Guardar solo el modelo en formato pickle
 model_filename = 'gradient_boosting_model.pkl'
 with open(model_filename, 'wb') as file:
-    pickle.dump(model, file)
+    # Guardar solo los atributos relevantes del modelo
+    model_data = {'model': model, 'random_state': None}
+    pickle.dump(model_data, file)
 
 # Imprimir las métricas
 print("MSE:", mse)
