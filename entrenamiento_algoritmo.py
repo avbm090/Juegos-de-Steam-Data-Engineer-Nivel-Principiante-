@@ -73,28 +73,20 @@ X = pd.DataFrame(data=X_n, columns=X.columns)
 # Dividir los datos en conjuntos de entrenamiento y prueba
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
-# se entrena el modelo
+# Se entrena el modelo
 model = GradientBoostingRegressor(learning_rate=0.2, max_depth=5, n_estimators=200)
 model.fit(X_train, y_train)
 
-# se hacen predicciones en el conjunto de prueba
-y_pred = model.predict(X_test)
-
-mse = mean_squared_error(y_test, y_pred)
-rmse = np.sqrt(mse)  # raíz del error cuadrático medio 
-mae = mean_absolute_error(y_test, y_pred)
-r2 = r2_score(y_test, y_pred) 
-
-# Después de entrenar el modelo Gradient Boosting
-model.random_state = None  # Configura el atributo random_state en None
-model_and_metrics = {
+# Guardar el modelo y y_train en formato pickle
+model_and_data = {
     'model': model,
-    'mean_squared_error': mse,
-    'root_mean_squared_error': rmse,
-    'mean_absolute_error': mae,
-    'r2_score': r2
+    'y_train': y_train
 }
 
-model_filename = 'gradient_boosting_model_con_metricas.pkl'
+model_filename = 'gradient_boosting_model.pkl'
 with open(model_filename, 'wb') as file:
-    pickle.dump(model_and_metrics, file)
+    pickle.dump(model_and_data, file)
+
+
+
+
