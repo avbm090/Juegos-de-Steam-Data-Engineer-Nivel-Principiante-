@@ -4,6 +4,8 @@ from fastapi import FastAPI
 import json
 import fastparquet
 
+# Para poder leer los datos correctamente, se codifican primero
+# por filas, luego se guardan como formato dataframe.
 rows=[]
 with open('steam_games.json', encoding='utf-8-sig') as f:
     for line in f.readlines():
@@ -11,12 +13,9 @@ with open('steam_games.json', encoding='utf-8-sig') as f:
 
 df=pd.DataFrame(rows)
 
-
+# Se transforma la columna "release_date" a otra nueva que sólo muestre el año
 df["release_date"] = pd.to_datetime(df["release_date"], format='%Y-%m-%d', errors='coerce').dt.year
 
-
-# se desanidan las listas en las columnas 'genres', 'tags', 'specs', etc.
-#df = df.explode('genres').explode('tags').explode('specs')
 
 # Se cambia el formato de la columna "early_access" de tipo booleano a valor numérico
 df["early_access"]=df["early_access"].astype(int)
@@ -24,17 +23,17 @@ df["early_access"]=df["early_access"].astype(int)
 # Se reemplazan los valores tipo "nan" por la clasificación "sin_calificar"
 df["sentiment"].fillna("sin_calificar",inplace=True)
 
-#Convertimos los valores de la columna metascore a numéricos
+# Se convierten los valores de la columna metascore a numéricos
 df["metascore"] = pd.to_numeric(df["metascore"], errors="coerce")
 
 # Se convierte la columna 'precio' a formato numérico
 df['price'] = pd.to_numeric(df['price'], errors='coerce')
 
-#eliminamos las columnas que no serán necesarias para las consultas
+# Se eliminan las columnas que no serán necesarias para las consultas
 
 df.drop(['app_name','url','discount_price','reviews_url','id'], axis=1, inplace=True)
 
-# Guarda el DataFrame en formato Parquet
+# Se guarda el DataFrame en formato Parquet
 df.to_parquet('steam_games.parquet', index=False)
 
 

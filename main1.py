@@ -1,15 +1,28 @@
 import pandas as pd
-import ast
 from fastapi import FastAPI
 import json
 import fastparquet
+from sklearn.preprocessing import StandardScaler
+import pickle
+from sklearn.preprocessing import LabelEncoder
 
-#rows=[]
-#with open('steam_games.json', encoding='utf-8-sig') as f:
- #   for line in f.readlines():
-  #    rows.append(ast.literal_eval(line))
 
-#df=pd.DataFrame(rows)
+# Se crea un objeto LabelEncoder
+label_encoder = LabelEncoder()
+
+# Se carga el modelo Boosting con sus métricas
+
+with open("gradient_boosting_model_con_metricas.pkl", "rb") as file:
+    loaded_data = pickle.load(file)
+
+modelo_boosting = loaded_data['model']
+loaded_mse = loaded_data['mean_squared_error']
+loaded_rmse = loaded_data['root_mean_squared_error']
+loaded_mae = loaded_data['mean_absolute_error']
+loaded_r2 = loaded_data['r2_score'] 
+
+# Se carga el dataframe
+df = pd.read_parquet('steam_games.parquet')
 
 app = FastAPI()
 
@@ -100,3 +113,54 @@ def metascore(anio: int):
     juegos_top = top_juegos[["title", "metascore"]].to_dict(orient="records")
 
     return juegos_top
+
+# Función para obtener etiquetas de la columna deseada
+
+@app.get("/etiquetas/")
+def mostrar_etiquetas(columna: str):
+    if columna in df.columns:
+        etiquetas = df[columna].explode().dropna().unique()
+        return {columna: etiquetas.tolist()}
+    else:
+        return {"error": "No se tienen registros de ese dato."}
+
+
+# Función para predecir el precio
+@app.get("/etiquetas/")
+def mostrar_etiquetas(columna: str):
+    if columna in df.columns:
+        etiquetas = df[columna].explode().dropna().unique()
+        return {columna: etiquetas.tolist()}
+    else:
+        return {"error": "No se tienen registros de ese dato."}
+
+# Función
+@app.get("/precio/")
+def precio(publisher, genres, release_date, tags, specs, early_access, developer, sentiment):
+    
+    # Crear un DataFrame con los valores de entrada
+    
+    data = [[publisher, genres, release_date, tags, specs, early_access, developer, sentiment]]
+    
+    data = pd.DataFrame(data, columns=['publisher', 'genres','release_date', 'tags', 'specs','early_access', 'developer', 'sentiment'])
+    
+    #Lista de columnas a las que se aplicará  Encoding
+    
+    columnas = ["publisher","genres","release_date", "tags", "specs","sentiment","developer"]
+    
+    # Se aplica LabelEncoder a las columnas seleccionadas
+    for col in columnas:
+        data[col] = label_encoder.fit_transform(data[col])
+
+    # Se realiza la predicción utilizando el modelo cargado
+    prediction = modelo_boosting.predict(data)
+    
+    # Métricas
+    
+    print("Métricas del modelo:")
+    print("Mean Squared Error:", loaded_mse)
+    print("Root Mean Squared Error:", loaded_rmse)
+    print("Mean Absolute Error:", loaded_mae)
+    print("R2 :", loaded_r2)
+   
+    return {"prediction": prediction[0]}
