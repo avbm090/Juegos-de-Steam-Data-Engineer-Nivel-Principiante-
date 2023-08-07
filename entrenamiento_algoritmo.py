@@ -16,7 +16,6 @@ from sklearn.tree import DecisionTreeRegressor
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.ensemble import GradientBoostingRegressor
 
-
 df = fastparquet.ParquetFile('steam_games.parquet').to_pandas()
 
 # Se desanidan las listas en las columnas "genres" y "specs"
@@ -86,10 +85,10 @@ rmse = np.sqrt(mse)
 mae = mean_absolute_error(y_test, prediction)
 r2 = r2_score(y_test, prediction)
 
-# Guardar solo el modelo en formato pickle
 model_filename = 'gradient_boosting_model.pkl'
 with open(model_filename, 'wb') as file:
     pickle.dump(model, file)
+
 
 # Imprimir las métricas
 print("MSE:", mse)
