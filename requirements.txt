@@ -19,7 +19,7 @@ fsspec
 h11==0.14.0
 idna==3.4
 importlib-metadata
-importlib-resources==6.0.0
+importlib-resources
 ipykernel==6.25.0
 ipython==8.14.0
 jedi==0.19.0
