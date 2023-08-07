@@ -18,19 +18,20 @@ from sklearn.tree import DecisionTreeRegressor
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.ensemble import GradientBoostingRegressor
 
-# Se crea un objeto LabelEncoder
-label_encoder = LabelEncoder()
-
-# Se carga el modelo Boosting con sus métricas
-
-with open("gradient_boosting_model_con_metricas.pkl", "rb") as file:
+# Carga el modelo desde el archivo pickle
+with open("gradient_boosting_model_con_metricas.pkl", 'rb') as file:
     loaded_data = pickle.load(file)
 
-modelo_boosting = loaded_data['model']
-loaded_mse = loaded_data['mean_squared_error']
+loaded_model = loaded_data['model']
 loaded_rmse = loaded_data['root_mean_squared_error']
 loaded_mae = loaded_data['mean_absolute_error']
-loaded_r2 = loaded_data['r2_score'] 
+loaded_r2 = loaded_data['r2_score']
+
+# Ajusta el atributo random_state del modelo cargado si es necesario
+loaded_model.random_state = None  # O el valor que desees
+
+# Se crea un objeto LabelEncoder
+label_encoder = LabelEncoder()
 
 # Se carga el dataframe
 df = pd.read_parquet('steam_games.parquet')
