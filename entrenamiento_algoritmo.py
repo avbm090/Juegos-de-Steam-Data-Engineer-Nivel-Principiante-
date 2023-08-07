@@ -73,8 +73,8 @@ X = pd.DataFrame(data=X_n, columns=X.columns)
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
 
-# Se entrena el modelo
-model = GradientBoostingRegressor(learning_rate=0.2, max_depth=5, n_estimators=200)
+# Entrenar el modelo
+model = GradientBoostingRegressor(learning_rate=0.2, max_depth=5, n_estimators=200, random_state=42)  # Asegúrate de fijar random_state
 model.fit(X_train, y_train)
 
 # Realizar la predicción en el conjunto de prueba
@@ -89,15 +89,14 @@ r2 = r2_score(y_test, prediction)
 # Guardar solo el modelo en formato pickle
 model_filename = 'gradient_boosting_model.pkl'
 with open(model_filename, 'wb') as file:
-    # Guardar solo los atributos relevantes del modelo
-    model_data = {'model': model, 'random_state': None}
-    pickle.dump(model_data, file)
+    pickle.dump(model, file)
 
 # Imprimir las métricas
 print("MSE:", mse)
 print("RMSE:", rmse)
 print("MAE:", mae)
 print("R2:", r2)
+
 
 
 
