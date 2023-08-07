@@ -20,11 +20,7 @@ from sklearn.ensemble import GradientBoostingRegressor
 
 # Carga el modelo desde el archivo pickle
 with open("gradient_boosting_model.pkl", 'rb') as file:
-    loaded_data = pickle.load(file)
-    
-# Extraer el modelo y y_train del diccionario
-loaded_model = loaded_data['model']
-loaded_y_train = loaded_data['y_train']
+    modelo = pickle.load(file)
 
 # Se crea un objeto LabelEncoder
 label_encoder = LabelEncoder()
@@ -147,35 +143,20 @@ def precio(publisher, genres, release_date, tags, specs, early_access, developer
     # Se aplica LabelEncoder a las columnas seleccionadas
     for col in columnas:
         data[col] = label_encoder.fit_transform(data[col])
-    
-       
-    # Extraer el modelo del diccionario
-    loaded_model = loaded_data['model']
+
 
     # Realizar la predicción utilizando el modelo cargado
-    prediction = loaded_model.predict(data)
+    prediction = modelo.predict(data)
     prediction = prediction.flatten()
 
-    # Crear un array con la misma longitud que loaded_y_train y llenarlo con la predicción
-    prediction_array = [prediction] * len(loaded_y_train)
-
-    # Calcular las métricas utilizando la predicción y el conjunto loaded_y_train
-    mse = mean_squared_error(loaded_y_train, prediction_array)
-    rmse = np.sqrt(mse)
-    mae = mean_absolute_error(loaded_y_train, prediction_array)
-    r2 = r2_score(loaded_y_train, prediction_array)
-
-    # Combinar las métricas en una respuesta
-    metrics = {
-     'mse': mse,
-     'rmse': rmse,
-     'mae': mae,
-     'r2': r2
-    }
-
     response = {
-        "prediction": prediction.tolist(),
-        "metrics": metrics
+        "predicción_precio": prediction.tolist(),
+        "metricas": {
+            "MSE": 21.313749278012445,
+            "RMSE: ": 4.616681630566748,
+            "MAE": 3.560192284621895,
+            "R2": 0.2938208845136231
+        }
     }
-
+    
     return response

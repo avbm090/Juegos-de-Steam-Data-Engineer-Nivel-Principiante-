@@ -69,24 +69,33 @@ X_n = scaler.fit_transform(X)
 # Se convierte el arreglo numpy a un DataFrame de pandas, manteniendo el nombre de las columnas
 X = pd.DataFrame(data=X_n, columns=X.columns)
 
-
 # Dividir los datos en conjuntos de entrenamiento y prueba
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+
 
 # Se entrena el modelo
 model = GradientBoostingRegressor(learning_rate=0.2, max_depth=5, n_estimators=200)
 model.fit(X_train, y_train)
 
-# Guardar el modelo y y_train en formato pickle
-model_and_data = {
-    'model': model,
-    'y_train': y_train
-}
+# Realizar la predicción en el conjunto de prueba
+prediction = model.predict(X_test)
 
+# Calcular métricas
+mse = mean_squared_error(y_test, prediction)
+rmse = np.sqrt(mse)
+mae = mean_absolute_error(y_test, prediction)
+r2 = r2_score(y_test, prediction)
+
+# Guardar solo el modelo en formato pickle
 model_filename = 'gradient_boosting_model.pkl'
 with open(model_filename, 'wb') as file:
-    pickle.dump(model_and_data, file)
+    pickle.dump(model, file)
 
+# Imprimir las métricas
+print("MSE:", mse)
+print("RMSE:", rmse)
+print("MAE:", mae)
+print("R2:", r2)
 
 
 
