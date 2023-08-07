@@ -85,23 +85,16 @@ rmse = np.sqrt(mse)  # raíz del error cuadrático medio
 mae = mean_absolute_error(y_test, y_pred)
 r2 = r2_score(y_test, y_pred) 
 
-# se guardan las métricas en un diccionario
-
+# Después de entrenar el modelo Gradient Boosting
+model.random_state = None  # Configura el atributo random_state en None
 model_and_metrics = {
     'model': model,
     'mean_squared_error': mse,
     'root_mean_squared_error': rmse,
     'mean_absolute_error': mae,
     'r2_score': r2
-    }
+}
 
 model_filename = 'gradient_boosting_model_con_metricas.pkl'
 with open(model_filename, 'wb') as file:
     pickle.dump(model_and_metrics, file)
-
-
-
-
-
-
-
