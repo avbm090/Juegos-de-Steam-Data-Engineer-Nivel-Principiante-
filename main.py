@@ -27,9 +27,6 @@ df = pd.read_parquet('steam_games.parquet')
 app = FastAPI()
 
 
-# Lee el archivo Parquet y crea un objeto DataFrame
-df = fastparquet.ParquetFile('steam_games.parquet').to_pandas()
-
 # Función para obtener los géneros más vendidos
 @app.get("/genero/")
 def genero(anio: int):
@@ -117,22 +114,13 @@ def metascore(anio: int):
 # Función para obtener etiquetas de la columna deseada
 
 @app.get("/etiquetas/")
-def mostrar_etiquetas(columna: str):
+def etiquetas(columna: str):
     if columna in df.columns:
         etiquetas = df[columna].explode().dropna().unique()
         return {columna: etiquetas.tolist()}
     else:
         return {"error": "No se tienen registros de ese dato."}
 
-
-# Función para predecir el precio
-@app.get("/etiquetas/")
-def mostrar_etiquetas(columna: str):
-    if columna in df.columns:
-        etiquetas = df[columna].explode().dropna().unique()
-        return {columna: etiquetas.tolist()}
-    else:
-        return {"error": "No se tienen registros de ese dato."}
 
 # Función
 @app.get("/precio/")
