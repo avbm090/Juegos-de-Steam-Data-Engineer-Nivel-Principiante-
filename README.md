@@ -3,7 +3,7 @@
 
 ### Descripción
 
- En este proyecto se presenta, mediante la plataforma render, los resultados de búsqueda de una base de datos de videojuegos de la plataforma steam.
+  En este proyecto se presenta, mediante la plataforma render, los resultados de búsqueda de una base de datos de videojuegos de la plataforma steam. Este proyecto, con intenciones de tener una primer aproximación al trabajo de un data ingenieer, está elaborado en el marco de la institución Soy Henry.
 
 ### Funcionalidad
 
