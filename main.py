@@ -27,6 +27,8 @@ app = FastAPI()
 
 
 
+import matplotlib.pyplot as plt
+
 # Función para obtener los géneros más vendidos
 @app.get("/genero/")
 def genero(anio: int):
@@ -43,24 +45,13 @@ def genero(anio: int):
     
     generos_top = dict(sorted(generos_count.items(), key=lambda item: item[1], reverse=True)[:5])
 
-    # Generar el gráfico de barras
-    etiquetas = generos_top.keys()
-    valores = generos_top.values()
-
-    plt.bar(etiquetas, valores)
-    plt.xlabel("Géneros")
-    plt.ylabel("Cantidad")
-    plt.title(f"Géneros más vendidos en el año {anio}")
-    plt.xticks(rotation=45)
-    plt.show()
-
     return generos_top
 
 
 # Función para obtener los juegos lanzados en un año
 @app.get("/juegos/")
 def juegos(anio: int):
-   # Filtrar el DataFrame por el año deseado
+   # Se filtra el DataFrame por el año deseado
     df_filtrado = df[df['release_date'] == anio]
     if df_filtrado.empty:
         return {"!": f"No hay datos disponibles para el año {anio}"}
@@ -107,19 +98,19 @@ def sentiment(anio: int):
 # Función para obtener los juegos top 5 con mayor metascore
 @app.get("/metascore/")
 def metascore(anio: int):
-    # Filtrar el DataFrame por el año proporcionado
+    # Se filtra el DataFrame por el año proporcionado
     df_anio = df[df["release_date"]== anio]
 
-    # Eliminar duplicados basados en la columna "title"
+    # Se eliminan duplicados basados en la columna "title"
     juegos_unicos = df_anio.drop_duplicates(subset="title")
 
-    # Ordenar los juegos únicos por Metascore de manera descendente
+    # Se ordenan los juegos únicos por Metascore de manera descendente
     juegos_ordenados = juegos_unicos.sort_values(by="metascore", ascending=False)
 
-    # Tomar los 5 juegos top con los Metascores más altos
+    # Se toman los 5 juegos top con los Metascores más altos
     top_juegos = juegos_ordenados.head(5)
 
-    # Crear una lista de diccionarios con la información de los juegos top
+    # Se crea una lista de diccionarios con la información de los juegos top
     juegos_top = top_juegos[["title", "metascore"]].to_dict(orient="records")
 
     return juegos_top
@@ -139,7 +130,7 @@ def etiquetas(columna: str):
 @app.get("/precio/")
 def precio(publisher, genres, release_date, tags, specs, early_access, developer, sentiment):
     
-    # Crear un DataFrame con los valores de entrada
+    # Se crea un DataFrame con los valores de entrada
     
     data = [[publisher, genres, release_date, tags, specs, early_access, developer, sentiment]]
     
@@ -154,7 +145,7 @@ def precio(publisher, genres, release_date, tags, specs, early_access, developer
         data[col] = encoder.fit_transform(data[col])
 
 
-    # Realizar la predicción utilizando el modelo cargado
+    # Se realiza la predicción utilizando el modelo cargado
     prediction = model.predict(data)
     prediction = prediction.flatten()
 
