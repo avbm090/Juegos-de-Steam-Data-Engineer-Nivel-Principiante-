@@ -33,7 +33,7 @@ df['price'] = pd.to_numeric(df['price'], errors='coerce')
 
 df.drop(['app_name','url','discount_price','reviews_url','id'], axis=1, inplace=True)
 
-# Se guarda el DataFrame en formato Parquet
+# Se guarda el DataFrame en formato parquet
 df.to_parquet('steam_games.parquet', index=False)
 
 
