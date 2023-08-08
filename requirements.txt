@@ -25,6 +25,7 @@ pydantic_core
 pyparsing
 python-dateutil
 pytz
+seaborn
 scikit-learn
 scipy
 six
