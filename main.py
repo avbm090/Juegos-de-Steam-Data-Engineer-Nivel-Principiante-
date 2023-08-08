@@ -149,7 +149,7 @@ def precio(publisher, genres, release_date, tags, specs, early_access, developer
     
     # Se genera una lista de columnas a las que se aplicará  Encoding
     
-    columnas = ["publisher","genres","release_date", "tags", "specs","sentiment","developer"]
+    columnas = ["publisher","genres","release_date", "tags", "specs","developer","sentiment"]
     
     # Se aplica LabelEncoder a las columnas seleccionadas
     for col in columnas:
