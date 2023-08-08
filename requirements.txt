@@ -27,7 +27,6 @@ python-dateutil
 pytz
 scikit-learn
 scipy
-seaborn
 six
 sniffio
 starlette
