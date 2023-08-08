@@ -4,6 +4,7 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import fastparquet
+import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 from sklearn.preprocessing import LabelEncoder
@@ -25,6 +26,7 @@ df = pd.read_parquet('steam_games.parquet')
 app = FastAPI()
 
 
+
 # Función para obtener los géneros más vendidos
 @app.get("/genero/")
 def genero(anio: int):
@@ -40,7 +42,20 @@ def genero(anio: int):
                     generos_count[genero_juego] = generos_count.get(genero_juego, 0) + 1
     
     generos_top = dict(sorted(generos_count.items(), key=lambda item: item[1], reverse=True)[:5])
+
+    # Generar el gráfico de barras
+    etiquetas = generos_top.keys()
+    valores = generos_top.values()
+
+    plt.bar(etiquetas, valores)
+    plt.xlabel("Géneros")
+    plt.ylabel("Cantidad")
+    plt.title(f"Géneros más vendidos en el año {anio}")
+    plt.xticks(rotation=45)
+    plt.show()
+
     return generos_top
+
 
 # Función para obtener los juegos lanzados en un año
 @app.get("/juegos/")
