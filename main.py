@@ -11,16 +11,14 @@ from sklearn.preprocessing import LabelEncoder
 from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
 from sklearn.model_selection import cross_val_predict
 from sklearn.ensemble import GradientBoostingRegressor
-import pickle
+import joblib
 
+# Nombre del archivo Joblib
+model_filename = 'gradient_boosting_model.joblib'
 
-with open("gradient_boosting_model.pkl", 'rb') as file:
-    modelo = pickle.load(file)
-
-
-
-# Se crea un objeto LabelEncoder
-label_encoder = LabelEncoder()
+# Cargar el modelo, StandardScaler y LabelEncoder
+with open(model_filename, 'rb') as file:
+    model, scaler, encoder = joblib.load(file)
 
 # Se carga el dataframe
 df = pd.read_parquet('steam_games.parquet')
@@ -139,11 +137,11 @@ def precio(publisher, genres, release_date, tags, specs, early_access, developer
     
     # Se aplica LabelEncoder a las columnas seleccionadas
     for col in columnas:
-        data[col] = label_encoder.fit_transform(data[col])
+        data[col] = encoder.fit_transform(data[col])
 
 
     # Realizar la predicción utilizando el modelo cargado
-    prediction = modelo.predict(data)
+    prediction = model.predict(data)
     prediction = prediction.flatten()
 
     response = {
