@@ -16,10 +16,11 @@
 
 1. etl: Muestra la primera etapa de procesamiento de los datos, se cambiaron algunos formatos de las columnas originales del dataframe y se eliminaron algunas columnas que se considero no aportaban al proyecto.
 2. eda_ml: Se detalla y justifica lo hecho en el proceso de eda, también se detalla y justifica lo considerado para el proceso de elección del algoritmo de machine learning.
-3. main: es el archivo principal donde se muestran las funciones vistas en la plataforma render.
-4. steam_games.json: es la base de datos original, que contiene la lista de características de los juegos.
-5. steam_games.parquet: este archivo se generó con el código escrito en etl.py.
-6. gradient_boosting: en este archivo se entrena el dataset limpio con el algoritmo gradient boosting.
+3. eda_ml.pdf: archivo anterior en formato pdf para una visualización más rápida.
+4. main: es el archivo principal donde se muestran las funciones vistas en la plataforma render.
+5. steam_games.json: es la base de datos original, que contiene la lista de características de los juegos.
+6. steam_games.parquet: este archivo se generó con el código escrito en etl.py.
+7. gradient_boosting: en este archivo se entrena el dataset limpio con el algoritmo gradient boosting.
 
 
 ## Versión de python utilizada
