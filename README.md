@@ -1,8 +1,5 @@
 # Proyecto de Machine Learning (Soy Henry): Juegos de Steam
 
-![Python Logo](https://www.python.org/static/community_logos/python-logo.png)
-![Render Logo](https://render.com/images/logo-dark.svg)
-
 ## Descripción
 
 En este proyecto presentamos los resultados de búsqueda de una base de datos de videojuegos de la plataforma Steam a través de la plataforma Render. El proyecto se enmarca en la institución Soy Henry y tiene como objetivo brindar una primera aproximación al trabajo de un data engineer.
@@ -31,3 +28,9 @@ Para la predicción de precios, se compararon varios algoritmos de machine learn
 
 Python 3.9.12
 
+---
+
+## Tecnología Utilizada
+
+![Python Logo](https://www.python.org/static/community_logos/python-logo.png)
+![Render Logo](https://render.com/images/logo-dark.svg)
