@@ -24,12 +24,6 @@ Para la predicción de precios, se compararon varios algoritmos de machine learn
 - **steam_games.parquet:** Este archivo se generó utilizando el código escrito en etl.py.
 - **gradient_boosting:** En este archivo se entrena el dataset limpio con el algoritmo gradient boosting.
 
-## Versión de Python utilizada
-
-Python 3.9.12
-
----
-
 ## Tecnología Utilizada
 
 ![Python Logo](https://www.python.org/static/community_logos/python-logo.png)
