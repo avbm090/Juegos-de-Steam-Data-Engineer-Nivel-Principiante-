@@ -27,4 +27,5 @@ Para la predicción de precios, se compararon varios algoritmos de machine learn
 ## Tecnología Utilizada
 
 ![Python Logo](https://www.python.org/static/community_logos/python-logo.png)
-![Render Logo](https://render.com/images/logo-dark.svg)
+![Render Logo](https://render.com/images/notion/render-logo.png =50x)
+
