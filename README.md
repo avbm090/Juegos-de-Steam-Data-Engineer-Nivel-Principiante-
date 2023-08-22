@@ -25,7 +25,5 @@ Para la predicción de precios, se compararon varios algoritmos de machine learn
 - **gradient_boosting:** En este archivo se entrena el dataset limpio con el algoritmo gradient boosting.
 
 ## Tecnología Utilizada
-
-![Python Logo](https://www.python.org/static/community_logos/python-logo.png)
-![Render Logo](https://render.com/images/notion/render-logo.png)
+Python | FastAPI | Pandas | Scikit-Learn | Render
 
