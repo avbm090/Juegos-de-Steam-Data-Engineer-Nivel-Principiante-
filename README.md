@@ -12,7 +12,7 @@ La aplicación de búsqueda proporciona resultados relevantes basados en varios 
 
 ### Predicción de precios
 
-Para la predicción de precios, se compararon varios algoritmos de machine learning, incluyendo regresión polinomial, decision tree, random forest, gradient boosting y support vector regression (SVR). También se exploró la posibilidad de utilizar algoritmos como k-means y PCA. El primero se usó para generar nuevas etiquetas que faciliten la implementación de algoritmos de regresión, mientras que el segundo se aplicó para reducir la dimensionalidad considerando las características más relevantes. Luego se intentó aplicar algún algoritmo de regresión sobre los componentes principales hallados.
+Para la predicción de precios, se compararon varios algoritmos de machine learning, incluyendo regresión polinomial, decision tree, random forest, gradient boosting y support vector regression (SVR). También se exploró la posibilidad de utilizar algoritmos como k-means y PCA. El primero se usó para generar nuevas etiquetas que faciliten la implementación de algoritmos de regresión, mientras que el segundo se aplicó para reducir la dimensionalidad considerando las características más relevantes. Se pudo evidenciar con las métricas obtenidas, que dichos modelos no eran adecuados para este conjunto de datos, sin embargo, el método gradient boosting presentó las mejores métricas. Quedó pendiente de probar el método SVR con núcleo radial.    Luego se intentó aplicar algún algoritmo de regresión sobre los componentes principales hallados.
 
 ## Archivos
 
