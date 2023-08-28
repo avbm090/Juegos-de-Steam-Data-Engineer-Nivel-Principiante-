@@ -2,7 +2,7 @@
 
 ## Descripción
 
-En este proyecto presentamos los resultados de búsqueda de una base de datos de videojuegos de la plataforma Steam a través de la plataforma Render. El proyecto se enmarca en la institución Soy Henry y tiene como objetivo brindar una primera aproximación al trabajo de un data engineer.
+En este proyecto se presentan los resultados de búsqueda de una base de datos de videojuegos de la plataforma Steam a través de la plataforma Render. El proyecto se enmarca en la institución Soy Henry y tiene como objetivo brindar una primera aproximación al trabajo de un data engineer.
 
 ## Funcionalidad
 
