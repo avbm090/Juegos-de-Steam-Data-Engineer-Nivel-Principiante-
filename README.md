@@ -2,7 +2,7 @@
 
 ## Descripción
 
-En este proyecto se presentan los resultados de recolección de datos, de una API de videojuegos de la plataforma Steam a través de Render. El proyecto se enmarca en la institución Soy Henry y tiene como objetivo brindar una primera aproximación al trabajo de un data engineer.
+En este proyecto se presentan los resultados de recolección de datos, de una API de videojuegos de la plataforma Steam a través de Render. El proyecto tiene como objetivo brindar una primera aproximación al trabajo de un data engineer.
 
 ## Funcionalidad
 
