@@ -1,1 +1,9 @@
-/venv
+
+# Ignorar entorno virtual
+mienv/
+
+# Ignorar caché de Python
+__pycache__/
+
+# Ignorar archivos compilados
+*.pyc
