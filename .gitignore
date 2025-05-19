@@ -1,9 +1,9 @@
 
-# Ignorar entorno virtual
+# se ignora entorno virtual
 mienv/
 
-# Ignorar caché de Python
+# se ignora caché
 __pycache__/
 
-# Ignorar archivos compilados
+# se ignoran archivos compilados
 *.pyc
